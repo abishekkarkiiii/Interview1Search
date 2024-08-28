@@ -12,7 +12,7 @@ describe('App Component', () => {
   test('renders user names after successful API call', async () => {
     axios.get.mockResolvedValue({
       data: [
-        { id: 1, name: 'John Doe' },
+        { id: 1, name: 'Leanne Graham' },
         { id: 2, name: 'Jane Doe' }
       ]
     });
@@ -25,7 +25,7 @@ describe('App Component', () => {
     });
   });
 
-  test('displays error message when API call fails', async () => {
+  test('Error ', async () => {
     axios.get.mockRejectedValue(new Error('Failed to fetch users.'));
 
     render(<App />);
