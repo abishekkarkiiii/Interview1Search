@@ -1,43 +1,32 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import './App.css';
-
-function App() {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/users')
-      .then((res) => {
-        setData(res.data); 
-      })
-      .catch((err) => {
-        setError('Failed to fetch users.'+err); 
-      });
-  }, []);
-
-  let content;
-
-  if (error) {
-  
-    content = <p style={{ color: 'red' }}>{error}</p>;
-  } else {
-   
-    content = (
-      <ul>
-        {data.map(user => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
+import { useState } from 'react';
+function SearchFilter() {
+    const [query, setQuery] = useState('');
+    const items = [
+        'Clock',
+        'Iphone',
+        'tv',
+        'laptop',
+        'refrigirator',
+        'mouse'
+    ];
+    const filteredItems = items.filter(item =>
+        item.toLowerCase().includes(query.toLowerCase())
     );
-  }
-
-  return (
-    <div className="App">
-      <h1>User List</h1>
-      {content}
-    </div>
-  );
+    return (
+        <div>
+            <input
+                type="text"
+                placeholder="Search a items"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+            />
+            <ul>
+                {filteredItems.map((item,index) => (
+                    <li key={index}>{item}</li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
-export default App;
+export default SearchFilter;
